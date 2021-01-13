@@ -1889,22 +1889,28 @@ PRIVATE
     modules/remote_bitrate_estimator/remote_estimator_proxy.cc
     sdk/media_constraints.cc
 
-
-    modules/desktop_capture/mac/desktop_configuration.mm
-    modules/desktop_capture/mac/desktop_frame_cgimage.h
-    modules/desktop_capture/mac/desktop_frame_cgimage.mm
-    modules/desktop_capture/mac/desktop_frame_iosurface.h
-    modules/desktop_capture/mac/desktop_frame_iosurface.mm
-    modules/desktop_capture/mac/desktop_frame_provider.h
-    modules/desktop_capture/mac/desktop_frame_provider.mm
-    modules/desktop_capture/mac/screen_capturer_mac.h
-    modules/desktop_capture/mac/screen_capturer_mac.mm
-    modules/desktop_capture/mouse_cursor_monitor_mac.mm
-    modules/desktop_capture/screen_capturer_darwin.mm
-    modules/desktop_capture/window_capturer_mac.mm
-    modules/desktop_capture/window_finder_mac.h
-    modules/desktop_capture/window_finder_mac.mm
-
+    #screen drawer
+    modules/desktop_capture/screen_drawer.cc
+    modules/desktop_capture/screen_drawer.h
+    modules/desktop_capture/screen_drawer_mac.cc
+                    
+    
+    
+    #primitives
+    modules/desktop_capture/desktop_capture_types.h
+    modules/desktop_capture/desktop_frame.cc
+    modules/desktop_capture/desktop_frame.h
+    modules/desktop_capture/desktop_geometry.cc
+    modules/desktop_capture/desktop_geometry.h
+    modules/desktop_capture/desktop_region.cc
+    modules/desktop_capture/desktop_region.h
+    modules/desktop_capture/shared_desktop_frame.cc
+    modules/desktop_capture/shared_desktop_frame.h
+    modules/desktop_capture/shared_memory.cc
+    modules/desktop_capture/shared_memory.h
+    
+    
+    #generic
     modules/desktop_capture/blank_detector_desktop_capturer_wrapper.cc
     modules/desktop_capture/blank_detector_desktop_capturer_wrapper.h
     modules/desktop_capture/cropped_desktop_frame.cc
@@ -1948,20 +1954,22 @@ PRIVATE
     modules/desktop_capture/window_finder.cc
     modules/desktop_capture/window_finder.h
     
-    #primitives
-    modules/desktop_capture/desktop_capture_types.h
-    modules/desktop_capture/desktop_frame.cc
-    modules/desktop_capture/desktop_frame.h
-    modules/desktop_capture/desktop_geometry.cc
-    modules/desktop_capture/desktop_geometry.h
-    modules/desktop_capture/desktop_region.cc
-    modules/desktop_capture/desktop_region.h
-    modules/desktop_capture/shared_desktop_frame.cc
-    modules/desktop_capture/shared_desktop_frame.h
-    modules/desktop_capture/shared_memory.cc
-    modules/desktop_capture/shared_memory.h
+    #mac specific //
+    modules/desktop_capture/mac/desktop_configuration.mm
+    modules/desktop_capture/mac/desktop_frame_cgimage.h
+    modules/desktop_capture/mac/desktop_frame_cgimage.mm
+    modules/desktop_capture/mac/desktop_frame_iosurface.h
+    modules/desktop_capture/mac/desktop_frame_iosurface.mm
+    modules/desktop_capture/mac/desktop_frame_provider.h
+    modules/desktop_capture/mac/desktop_frame_provider.mm
+    modules/desktop_capture/mac/screen_capturer_mac.h
+    modules/desktop_capture/mac/screen_capturer_mac.mm
+    modules/desktop_capture/mouse_cursor_monitor_mac.mm
+    modules/desktop_capture/screen_capturer_darwin.mm
+    modules/desktop_capture/window_capturer_mac.mm
+    modules/desktop_capture/window_finder_mac.h
+    modules/desktop_capture/window_finder_mac.mm
     
-    #mac specific //41
     modules/desktop_capture/mac/desktop_configuration.h
     modules/desktop_capture/mac/desktop_configuration_monitor.cc
     modules/desktop_capture/mac/desktop_configuration_monitor.h
@@ -1969,6 +1977,7 @@ PRIVATE
     modules/desktop_capture/mac/full_screen_mac_application_handler.h
     modules/desktop_capture/mac/window_list_utils.cc
     modules/desktop_capture/mac/window_list_utils.h
+    
 
     stats/rtc_stats_report.cc
     stats/rtc_stats.cc
@@ -2046,6 +2055,11 @@ else()
         common_audio/third_party/ooura/fft_size_128/ooura_fft_neon.cc
     )
 endif()
+
+target_compile_definitions(tg_owt
+    PRIVATE
+        HAVE_SCTP
+)
 
 if (APPLE)
     remove_target_sources(tg_owt ${webrtc_loc}
